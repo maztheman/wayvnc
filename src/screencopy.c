@@ -87,6 +87,7 @@ static void screencopy_buffer_done(void* data,
 		width = self->dmabuf_width;
 		height = self->dmabuf_height;
 		stride = 0;
+		nvnc_log(NVNC_LOG_INFO, "screencopy_buffer_done self-fourcc %X, shm %X", self->fourcc, fourcc_from_wl_shm(self->wl_shm_format));
 		fourcc = self->fourcc;
 		type = WV_BUFFER_DMABUF;
 	} else
@@ -98,6 +99,8 @@ static void screencopy_buffer_done(void* data,
 		fourcc = fourcc_from_wl_shm(self->wl_shm_format);
 		type = WV_BUFFER_SHM;
 	}
+
+	
 
 	wv_buffer_pool_resize(self->pool, type, width, height, stride, fourcc);
 
